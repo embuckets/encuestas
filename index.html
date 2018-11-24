@@ -28,7 +28,7 @@
     </header>
 
     <main>
-        <form action="login" method="POST">
+        <form action="src/controller/login.php" method="POST">
             <div class="form-log">
                 <label for="uname"><b>Matrícula</b></label>
                 <input class="form-input" type="text" placeholder="" name="uname" required>
@@ -38,6 +38,7 @@
 
                 <button class="form-submit" type="submit">Entrar</button>
         </form>
+        <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
     </main>
 
     <footer>
