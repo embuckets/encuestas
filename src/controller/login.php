@@ -1,5 +1,8 @@
 <?php
+    xdebug_break();
     session_start( );
+    // echo $_SERVER['HTTP_X_FORWARDED_FOR'] ;
+    // echo  $_SERVER['REMOTE_ADDR'];
     require 'conexion.php';
     require 'alumnoDAO.php';
     require 'validate.php';
@@ -24,10 +27,12 @@
             $_SESSION['user_id'] = $myusername;
             $_SESSION['user_name'] = $$alumno['nombre'];
 
+            $conn->close();
             header('location: ../../home.html');
         }
         else {
             $error = "Your Login Name or Password is invalid";
+            $conn->close();
             header('location: ../../index.html');
 
         }
