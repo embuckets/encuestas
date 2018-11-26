@@ -13,12 +13,12 @@
     <script src="js/user.js"></script>
 </head>
 
-<body onload="requestEncuestas( )">
-    <header onload="requestUser( )">
+<body onload="requestEncuestas( ); requestUser( )">
+    <header>
         <div class="topnav">
             <a class="active left" href="#home">SIVO</a>
             <div class="dropdown right">
-                <button class="dropbtn"> <!-- Usuario Tengo que meter lo de SESSION -->
+                <button class="dropbtn">
                     <div id="userName"></div>
                     <i class="fa fa-caret-down"></i>
                 </button>

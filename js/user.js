@@ -5,8 +5,7 @@ function requestUser( ) {
          document.getElementById("userName").innerHTML = this.responseText;
       }
    };
-   alert("Antes!");
-   xmlhttp.open("POST", "../src/user.php", true);
-   //xmlhttp.open("POST", "test.txt", true);
+   
+   xmlhttp.open("POST", "src/user.php", true);
    xmlhttp.send( );
 }
