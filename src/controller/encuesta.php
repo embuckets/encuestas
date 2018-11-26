@@ -31,10 +31,10 @@
          $jsonTemp['cierra']['minute'] = $fecha_cierra['minute'];
          $jsonTemp['cierra']['second'] = $fecha_cierra['second'];
 
-         $jsonObj = json_encode($jsonTemp);
-         $encuestas[] = $jsonObj;
+         //$jsonObj = json_encode($jsonTemp);
+         $encuestas[] = $jsonTemp;
       }
    }
-
    $conn->close( );
+   echo json_encode($encuestas);
 ?>
