@@ -10,14 +10,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/home.js"></script>
+    <script src="js/user.js"></script>
 </head>
 
-<body onload="requestEncuestas()">
-    <header>
+<body onload="requestEncuestas( )">
+    <header onload="requestUser( )">
         <div class="topnav">
             <a class="active left" href="#home">SIVO</a>
             <div class="dropdown right">
-                <button class="dropbtn">Usuario <!-- Tengo que meter lo de SESSION -->
+                <button class="dropbtn"> <!-- Usuario Tengo que meter lo de SESSION -->
+                    <div id="userName"></div>
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
