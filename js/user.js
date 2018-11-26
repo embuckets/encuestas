@@ -6,7 +6,7 @@ function requestUser( ) {
       }
    };
    alert("Antes!");
-   //xmlhttp.open("POST", "../src/user.php", true);
-   xmlhttp.open("POST", "test.txt", true);
+   xmlhttp.open("POST", "../src/user.php", true);
+   //xmlhttp.open("POST", "test.txt", true);
    xmlhttp.send( );
 }
