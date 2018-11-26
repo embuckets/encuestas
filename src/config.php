@@ -12,8 +12,8 @@
  $config = array(
      "db" => array(
              "dbname" => "encuestas",
-             "emilio-user" => "embuckets",
-             "emilio-password" => "evangelion01",
+             "user" => "equipo",
+             "password" => "equipo",
              "host" => "localhost"
      )
  );

@@ -316,4 +316,5 @@ INSERT INTO `encuestas`.`administrador` (`matricula`, `nombre`) VALUES ('789', '
 
 COMMIT;
 
-GRANT ALL PRIVILEGES ON encuestas.* to embuckets@'localhost' IDENTIFIED BY 'evangelion01';
+CREATE USER 'equipo'@'localhost' IDENTIFIED BY 'equipo';
+GRANT ALL PRIVILEGES ON encuestas.* to equipo@'localhost' IDENTIFIED BY 'equipo';
