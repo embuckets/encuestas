@@ -1,5 +1,5 @@
 <?php
-    //  xdebug_break();
+   //  xdebug_break();
     session_start( );
     // echo $_SERVER['HTTP_X_FORWARDED_FOR'] ;
     // echo  $_SERVER['REMOTE_ADDR'];
@@ -8,7 +8,7 @@
     require 'validate.php';
     require 'adminDAO.php';
 
-
+    
     $conn = getConnection();
 
     if ($conn->connect_error) {
@@ -16,38 +16,40 @@
         $error += $conn->connect_error;
         $conn->close();
         header('location: ../../index.html');
-        exit();
         // jio
         // fdsfdsafdsa
     }
 
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
+    // if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $myusername = mysqli_real_escape_string($conn, $_POST['uname']);
-        $mypassword = mysqli_real_escape_string($conn, $_POST['psw']); 
+        // $myusername = mysqli_real_escape_string($conn, $_POST['uname']);
+        // $mypassword = mysqli_real_escape_string($conn, $_POST['psw']); 
+        $myusername = "123";
+        $mypassword = "123";
+
         $rol = validar($myusername, $mypassword, $conn);
         if ($rol["rol"] == "alumno"){
             $alumno = getAlumnoPorMatricula($myusername, $conn);
-            $_SESSION['matricula'] = $myusername;
-            $_SESSION['nombre'] = $alumno['nombre'];
-
+            $_SESSION['login_user'] = $myusername;
+            $_SESSION['login_user_name'] = $alumno['nombre'];
+            
             // $conn->close();
-            header('location: ../../home.php');
+            header('location: ../../home.html');
         }
         else if ($rol["rol"] == "admin"){
             $admin = getAdminPorMatricula($myusername, $conn);
-            $_SESSION['matricula'] = $myusername;
-            $_SESSION['nombre'] = $admin['nombre'];
+            $_SESSION['login_user'] = $myusername;
+            $_SESSION['login_user_name'] = $admin['nombre'];
             // $conn->close();
-            header('location: ../../home.php');
+            header('location: ../../home.html');
 
-        }
-        else {
+        } else {
             $error = "Your Login Name or Password is invalid";
             // $conn->close();
-            header('location: ../../index.php');
+            header('location: ../../index.html');
+
         }
-    }
+    // }
     $conn->close();
 
     // $sql = "SELECT matricula, password FROM login WHERE matricula = '$myusername' and password = '$mypassword'";

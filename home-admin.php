@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -17,7 +20,7 @@
         <div class="topnav">
             <a class="active left" href="#home">SIVO</a>
             <div class="dropdown right">
-                <button class="dropbtn"><?php $_SESSION['user_name'] ?>
+                <button class="dropbtn"><?php echo $_SESSION['nombre']; ?>
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">

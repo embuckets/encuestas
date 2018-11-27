@@ -1,5 +1,5 @@
 <?php
-    function getAlumnoPorMatricula($matricula, $conn){
+    function getAdminPorMatricula($matricula, $conn){
         $result = null;
         // require 'conexion.php';
         // $conn = getConnection();
@@ -8,7 +8,7 @@
         //     return null;
         // }
 
-        $sql = "SELECT * FROM alumno where matricula = '$matricula'";
+        $sql = "SELECT * FROM administrador where matricula = '$matricula'";
         $result = $conn->query($sql);
 
         if ($result->num_rows == 1) {
