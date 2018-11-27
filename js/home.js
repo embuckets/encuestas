@@ -1,11 +1,10 @@
 
-function Encuesta(id, titulo, descripcion, idUnidad) {
+function Encuesta(id, titulo, descripcion) {
     this.id = id;
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.abre = null;
     this.cierra = null;
-    this.idUnidad = idUnidad;
     this.setAbre = function (year, month, day, hour, minute, second) {
         this.abre = new Date(year, month, day, hour, minute, second);
     };
@@ -18,10 +17,9 @@ function buildEncuesta(jsonObj) {
     var idEncuesta = jsonObj.idEncuesta;
     var titulo = jsonObj.titulo;
     var descripcion = jsonObj.descripcion;
-    var idUnidad = jsonObj.idUnidad;
-    var encuesta = new Encuesta(idEncuesta, titulo, descripcion, idUnidad);
-    encuesta.setAbre(jsonObj.abre.year, jsonObj.abre.monthValue, jsonObj.abre.dayOfMonth, jsonObj.abre.hour, jsonObj.abre.minute, jsonObj.abre.second);
-    encuesta.setCierra(jsonObj.cierra.year, jsonObj.cierra.monthValue, jsonObj.cierra.dayOfMonth, jsonObj.cierra.hour, jsonObj.cierra.minute, jsonObj.cierra.second);
+    var encuesta = new Encuesta(idEncuesta, titulo, descripcion);
+    encuesta.setAbre(jsonObj.abre.year, jsonObj.abre.month, jsonObj.abre.day, jsonObj.abre.hour, jsonObj.abre.minute, jsonObj.abre.second);
+    encuesta.setCierra(jsonObj.cierra.year, jsonObj.cierra.month, jsonObj.cierra.day, jsonObj.cierra.hour, jsonObj.cierra.minute, jsonObj.cierra.second);
     return encuesta;
 }
 
@@ -34,7 +32,6 @@ function display(jsonText) {
         var card = buildCard(encuesta);
         container.appendChild(card);
     }
-
 }
 
 function buildCard(encuesta) {
@@ -88,6 +85,6 @@ function requestEncuestas() {
             display(this.responseText);
         }
     };
-    xhttp.open("GET", "encuesta", true);
+    xhttp.open("GET", "src/controller/encuesta.php", true);
     xhttp.send();
 }
