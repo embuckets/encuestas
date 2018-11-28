@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -9,36 +12,27 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="js/home.js"></script>
+    <script src="js/user.js"></script>
 </head>
 
-<body>
+<body onload="requestEncuestas( ); requestUser( )">
     <header>
         <div class="topnav">
             <a class="active left" href="#home">SIVO</a>
-            <!-- <div class="dropdown right">
-                <button class="dropbtn">Usuario
+            <div class="dropdown right">
+                <button class="dropbtn"><?php echo $_SESSION['nombre']; ?>
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
                     <a href="#"><i class="fa fa-power-off"></i> Salir</a>
                 </div>
-            </div> -->
+            </div>
         </div>
     </header>
 
     <main>
-        <form action="src/controller/login.php" method="POST">
-            <div class="form-log">
-                <label for="uname"><b>Matrícula</b></label>
-                <input class="form-input" type="text" placeholder="" name="uname" required>
-
-                <label for="psw"><b>Contraseña</b></label>
-                <input class="form-input" type="password" placeholder="" name="psw" required>
-
-                <button class="form-submit" type="submit">Entrar</button>
-        </form>
-        <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
+        <div id="container" class="encuestas grid-container"></div>
     </main>
 
     <footer>

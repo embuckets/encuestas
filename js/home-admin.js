@@ -5,33 +5,33 @@ function Encuesta(id, titulo, descripcion) {
     this.descripcion = descripcion;
     this.abre = null;
     this.cierra = null;
-    this.setAbre = function (year, month, day, hour, minute, second) {
-        this.abre = new Date(year, month, day, hour, minute, second);
+    this.setAbre = function (dateString) {
+        this.abre = new Date(dateString);
     };
-    this.setCierra = function (year, month, day, hour, minute, second) {
-        this.cierra = new Date(year, month, day, hour, minute, second);
+    this.setCierra = function (dateString) {
+        this.cierra = new Date(dateString);
     };
 }
 
 function buildEncuesta(jsonObj) {
-    var idEncuesta = jsonObj.idEncuesta;
+    var id_encuesta = jsonObj.id_encuesta;
     var titulo = jsonObj.titulo;
     var descripcion = jsonObj.descripcion;
-    var encuesta = new Encuesta(idEncuesta, titulo, descripcion);
-    encuesta.setAbre(jsonObj.abre.year, jsonObj.abre.month, jsonObj.abre.day, jsonObj.abre.hour, jsonObj.abre.minute, jsonObj.abre.second);
-    encuesta.setCierra(jsonObj.cierra.year, jsonObj.cierra.month, jsonObj.cierra.day, jsonObj.cierra.hour, jsonObj.cierra.minute, jsonObj.cierra.second);
+    var encuesta = new Encuesta(id_encuesta, titulo, descripcion);
+    encuesta.setAbre(jsonObj.abre);
+    encuesta.setCierra(jsonObj.cierra);
     return encuesta;
 }
 
 function display(jsonText) {
     var container = document.getElementById("container");
     var jsonArray = JSON.parse(jsonText);
-    var encuestas = [];
     for (i in jsonArray) {
         var encuesta = buildEncuesta(jsonArray[i]);
         var card = buildCard(encuesta);
         container.appendChild(card);
     }
+
 }
 
 function buildCard(encuesta) {
@@ -54,12 +54,14 @@ function buildCard(encuesta) {
 
     var cardButton = document.createElement("input");
     cardButton.type = "submit";
-    cardButton.value = "Votar";
+    cardButton.value = "Resultados";
     cardButton.className = "card-button";
-    cardButton.innerHTML = "Votar";
+    if (encuesta.cierra > new Date()) {
+        cardButton.disabled = true;
+    }
 
     var form = document.createElement("form");
-    form.method  = "POST";
+    form.method = "POST";
     form.action = "encuesta";
     var hidden = document.createElement("input");
     hidden.type = "hidden";
@@ -77,7 +79,6 @@ function buildCard(encuesta) {
     return cardDiv;
 }
 
-
 function requestEncuestas() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -85,6 +86,6 @@ function requestEncuestas() {
             display(this.responseText);
         }
     };
-    xhttp.open("GET", "src/controller/encuesta.php", true);
+    xhttp.open("GET", "src/controller/encuestaController", true);
     xhttp.send();
 }
