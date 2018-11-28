@@ -17,8 +17,6 @@
         $conn->close();
         header('location: ../../index.html');
         exit();
-        // jio
-        // fdsfdsafdsa
     }
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -39,7 +37,7 @@
             $_SESSION['matricula'] = $myusername;
             $_SESSION['nombre'] = $admin['nombre'];
             // $conn->close();
-            header('location: ../../home.php');
+            header('location: ../../home-admin.php');
 
         }
         else {

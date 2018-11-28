@@ -12,10 +12,10 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/home-admin.js"></script>
+    <script src="js/admin-crear.js"></script>
 </head>
 
-<body onload="requestEncuestas()">
+<body>
     <header>
         <div class="topnav">
             <a class="active left" href="#home">SIVO</a>
@@ -32,14 +32,27 @@ session_start();
     </header>
 
     <main>
-        <div id="container" class="encuestas grid-container"></div>
+        <h1>Crear Encuesta</h1>
+        <div class="form-crear" id="container">
+            <form id="form-crear" action="src/controller/crearController.php">
+                <label class="form-crear-titulo" for="titulo">Titulo</label>
+                <input class="form-crear-input" type="text" name="titulo" required>
+                <label class="form-crear-titulo" for="desc">Descripción</label>
+                <textarea class="form-crear-input form-crear-input-area" name="desc" rows="5" form="form-crear" required></textarea>
+                <label class="form-crear-titulo" for="opciones">Opciones</label>
+                <input class="form-crear-input-opc" type="text" id="myInput">
+                <span onclick="newOption()" class="form-crear-new" >Agregar</span>
+                <div id="myOptions"></div>
+
+            </form>
+        </div>
     </main>
 
-    <footer>
+    <!-- <footer>
         <div class="footer">
             <p>Footer</p>
         </div>
-    </footer>
+    </footer> -->
 
 </body>
 
