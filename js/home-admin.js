@@ -86,6 +86,6 @@ function requestEncuestas() {
             display(this.responseText);
         }
     };
-    xhttp.open("GET", "src/controller/encuestaController", true);
+    xhttp.open("GET", "src/controller/encuestaController.php", true);
     xhttp.send();
 }

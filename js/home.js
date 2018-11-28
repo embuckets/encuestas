@@ -5,21 +5,21 @@ function Encuesta(id, titulo, descripcion) {
     this.descripcion = descripcion;
     this.abre = null;
     this.cierra = null;
-    this.setAbre = function (year, month, day, hour, minute, second) {
-        this.abre = new Date(year, month, day, hour, minute, second);
+    this.setAbre = function (dateString) {
+        this.abre = new Date(dateString);
     };
-    this.setCierra = function (year, month, day, hour, minute, second) {
-        this.cierra = new Date(year, month, day, hour, minute, second);
+    this.setCierra = function (dateString) {
+        this.cierra = new Date(dateString);
     };
 }
 
 function buildEncuesta(jsonObj) {
-    var idEncuesta = jsonObj.idEncuesta;
+    var id_encuesta = jsonObj.id_encuesta;
     var titulo = jsonObj.titulo;
     var descripcion = jsonObj.descripcion;
-    var encuesta = new Encuesta(idEncuesta, titulo, descripcion);
-    encuesta.setAbre(jsonObj.abre.year, jsonObj.abre.month, jsonObj.abre.day, jsonObj.abre.hour, jsonObj.abre.minute, jsonObj.abre.second);
-    encuesta.setCierra(jsonObj.cierra.year, jsonObj.cierra.month, jsonObj.cierra.day, jsonObj.cierra.hour, jsonObj.cierra.minute, jsonObj.cierra.second);
+    var encuesta = new Encuesta(id_encuesta, titulo, descripcion);
+    encuesta.setAbre(jsonObj.abre);
+    encuesta.setCierra(jsonObj.cierra);
     return encuesta;
 }
 
@@ -55,7 +55,7 @@ function buildCard(encuesta) {
     var cardButton = document.createElement("input");
     cardButton.type = "submit";
     cardButton.className = "card-button";
-    // si cierra antes que hora actual permite votar
+    // si cierra despues que hora actual permite votar
     if (encuesta.cierra > new Date()) {
         cardButton.value = "Votar";
     } else {
@@ -92,6 +92,6 @@ function requestEncuestas() {
             display(this.responseText);
         }
     };
-    xhttp.open("GET", "src/controller/encuesta.php", true);
+    xhttp.open("GET", "src/controller/encuestaController.php", true);
     xhttp.send();
 }
