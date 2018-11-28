@@ -16,14 +16,6 @@
     <header>
         <div class="topnav">
             <a class="active left" href="#home">SIVO</a>
-            <!-- <div class="dropdown right">
-                <button class="dropbtn">Usuario
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="#"><i class="fa fa-power-off"></i> Salir</a>
-                </div>
-            </div> -->
         </div>
     </header>
 

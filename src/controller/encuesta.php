@@ -1,6 +1,16 @@
 <?php
    require 'conexion.php';
+
    session_start( );
+
+   $conn = getConnection();
+   if ($conn->connect_error) {
+      $error = "Por el momento la Base de Datos no funciona<br>";
+      $error += $conn->connect_error;
+      $conn->close();
+      header('location: ../../index.php');
+      exit();
+  }
 
    $sql = "SELECT * FROM encuesta";
 
@@ -8,6 +18,7 @@
    $jsonTemp = array( );
    if ($result = $conn->query($sql)) {
       while ($row = $result->fetch_assoc( )) {
+         $jsonTemp['id_encuesta'] = $row['id_encuesta'];
          $jsonTemp['titulo'] = $row['titulo'];
          $jsonTemp['descripcion'] = $row['descripcion'];
 
@@ -35,6 +46,6 @@
          $encuestas[] = $jsonTemp;
       }
    }
-   $conn->close( );
+   $conn->close();
    echo json_encode($encuestas);
 ?>

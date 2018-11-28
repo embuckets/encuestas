@@ -54,12 +54,19 @@ function buildCard(encuesta) {
 
     var cardButton = document.createElement("input");
     cardButton.type = "submit";
-    cardButton.value = "Votar";
     cardButton.className = "card-button";
-    cardButton.innerHTML = "Votar";
+    // si cierra antes que hora actual permite votar
+    if (encuesta.cierra > new Date()) {
+        cardButton.value = "Votar";
+    } else {
+        cardButton.value = "Resultados";
+    }
+    if (encuesta.abre > new Date()) {
+        cardButton.disabled = true;
+    }
 
     var form = document.createElement("form");
-    form.method  = "POST";
+    form.method = "POST";
     form.action = "encuesta";
     var hidden = document.createElement("input");
     hidden.type = "hidden";

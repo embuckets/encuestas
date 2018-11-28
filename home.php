@@ -16,7 +16,7 @@ session_start();
     <script src="js/user.js"></script>
 </head>
 
-<body onload="requestEncuestas( ); requestUser( )">
+<body onload="requestEncuestas( );">
     <header>
         <div class="topnav">
             <a class="active left" href="#home">SIVO</a>

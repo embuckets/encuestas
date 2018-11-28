@@ -15,7 +15,7 @@
         $error = "Por el momento la Base de Datos no funciona<br>";
         $error += $conn->connect_error;
         $conn->close();
-        header('location: ../../index.html');
+        header('location: ../../index.php');
         exit();
     }
 
