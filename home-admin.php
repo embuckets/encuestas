@@ -18,14 +18,14 @@ session_start();
 <body onload="requestEncuestas()">
     <header>
         <div class="topnav">
-            <a class="active left" href="#home">SIVO</a>
+            <a class="active left" href="home-admin.php">SIVO</a>
             <div class="dropdown right">
                 <button class="dropbtn"><?php echo $_SESSION['nombre']; ?>
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
                     <a href="crear.php"><i class="fa fa-plus"></i> Nueva encuesta</a>
-                    <a href="#"><i class="fa fa-power-off"></i> Salir</a>
+                    <a href="src/logout.php"><i class="fa fa-power-off"></i> Salir</a>
                 </div>
             </div>
         </div>

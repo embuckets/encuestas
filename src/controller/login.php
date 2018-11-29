@@ -1,8 +1,5 @@
 <?php
-    //  xdebug_break();
     session_start( );
-    // echo $_SERVER['HTTP_X_FORWARDED_FOR'] ;
-    // echo  $_SERVER['REMOTE_ADDR'];
     require 'conexion.php';
     require 'alumnoDAO.php';
     require 'validate.php';
@@ -47,24 +44,5 @@
         }
     }
     $conn->close();
-
-    // $sql = "SELECT matricula, password FROM login WHERE matricula = '$myusername' and password = '$mypassword'";
-    // $result = mysqli_query($conn, $sql);
-    // $row = mysqli_fetch_array($result, MYSQLI_ASSOC);      
-    // $count = mysqli_num_rows($result);
-
-    // if ($count == 1) {
-    //     //session_register("myusername");
-    //     $_SESSION['login_user'] = $myusername;
-
-    //     header('location: ../../home.html');
-    // } else {
-    //         $error = "Your Login Name or Password is invalid";
-    //         header('location: ../../index.html');
-    //     }
-    // }
-
-    // echo 'Connection succesful';
-    // $conn->close();
 
 ?>
