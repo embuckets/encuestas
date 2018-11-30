@@ -14,12 +14,10 @@ function newOption() {
     optionDiv.appendChild(deleteBtn);
     optionsContainer.appendChild(optionDiv);
 
-
     newOption.value = document.getElementById("myInput").value;
     newOption.name = "options[]";
-    newOption.disabled = true;
+    newOption.readOnly = true;
     newOption.className = "form-crear-input-opc disabled";
-
 
     deleteBtn.innerHTML = "\u00D7";
     deleteBtn.className = "form-crear-del";

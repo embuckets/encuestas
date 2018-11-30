@@ -61,11 +61,11 @@ session_start();
         </div>
     </main>
 
-    <!-- <footer>
+    <footer>
         <div class="footer">
             <p>Footer</p>
         </div>
-    </footer> -->
+    </footer>
 
 </body>
 
