@@ -1,0 +1,2 @@
+select opcion.opcion, count(votacion.id_opcion) as votos from votacion right join opcion using (id_encuesta,id_opcion) where id_encuesta=1 group by opcion.opcion;
+-- no sirve -> select encuesta.titulo, encuesta.descripcion, encuesta.abre, encuesta.cierra, opcion.opcion, count(votacion.id_opcion) as votos from encuesta, votacion right join opcion on votacion.id_encuesta=opcion.id_encuesta and votacion.id_opcion=opcion.id_opcion where encuesta.id_encuesta=1 group by opcion.opcion;

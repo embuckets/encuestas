@@ -79,14 +79,15 @@ function buildCard(encuesta) {
     return cardDiv;
 }
 
-function requestEncuestas() {
+function requestResultados() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            display(this.responseText);
+            // display(this.responseText);
+            document.getElementById("demo").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "src/controller/encuestaController.php", true);
+    xhttp.open("GET", "src/controller/resultadosController.php", true);
     // xhttp.open("GET", "src/controller/encuestaController.php?diasAtras=7&diasAdelante=1", true);
     xhttp.send();
 }

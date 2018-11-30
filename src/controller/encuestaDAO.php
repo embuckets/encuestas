@@ -41,4 +41,16 @@
         }
     }
 
+    function getEncuestaById($encuestaId, $conn){
+        $sql = "SELECT * from encuesta where id_encuesta=$encuestaId";
+        $resultSet = $conn->query($sql);
+
+        if ($resultSet->num_rows == 1) {
+            $result = $resultSet->fetch_assoc();
+        } else {
+            $result = null;
+        }
+        return $result;  
+    }
+
 ?>
