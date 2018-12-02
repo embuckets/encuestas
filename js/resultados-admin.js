@@ -13,77 +13,55 @@ function Encuesta(id, titulo, descripcion) {
     };
 }
 
-function buildEncuesta(jsonObj) {
-    var id_encuesta = jsonObj.id_encuesta;
-    var titulo = jsonObj.titulo;
-    var descripcion = jsonObj.descripcion;
-    var encuesta = new Encuesta(id_encuesta, titulo, descripcion);
-    encuesta.setAbre(jsonObj.abre);
-    encuesta.setCierra(jsonObj.cierra);
-    return encuesta;
+function loadAPI(){
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
 }
 
 function display(jsonText) {
-    var container = document.getElementById("container");
-    var jsonArray = JSON.parse(jsonText);
-    for (i in jsonArray) {
-        var encuesta = buildEncuesta(jsonArray[i]);
-        var card = buildCard(encuesta);
-        container.appendChild(card);
-    }
 
+    var jsonObj = JSON.parse(jsonText);
+    document.getElementById("titulo").innerHTML = jsonObj.titulo;
+    document.getElementById("desc").innerHTML = jsonObj.desc;
+    document.getElementById("abre").innerHTML = jsonObj.abre;
+    document.getElementById("cierra").innerHTML = jsonObj.cierra;
+    drawChart(jsonObj);
 }
 
-function buildCard(encuesta) {
-    var cardDiv = document.createElement("div");
-    cardDiv.className = "card grid-item";
-    var cardTitle = document.createElement("h3");
-    cardTitle.className = "card-title";
-    cardTitle.innerHTML = encuesta.titulo;
-    var cardText = document.createElement("p");
-    cardText.className = "card-text";
-    cardText.innerHTML = encuesta.descripcion;
+function drawChart(jsonObj) {
+    // Draw the chart and set the chart values
+    // google.charts.load('current', { 'packages': ['corechart'] });
+    // google.charts.setOnLoadCallback(drawChart);
 
-    var cardAbre = document.createElement("p");
-    cardAbre.className = "text-muted";
-    cardAbre.innerHTML = "Abre: " + encuesta.abre.toLocaleString();
-
-    var cardCierra = document.createElement("p");
-    cardCierra.className = "text-muted";
-    cardCierra.innerHTML = "Cierra: " + encuesta.cierra.toLocaleString();
-
-    var cardButton = document.createElement("input");
-    cardButton.type = "submit";
-    cardButton.value = "Resultados";
-    cardButton.className = "card-button";
-    if (encuesta.cierra > new Date()) {
-        cardButton.disabled = true;
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Resultados');
+    data.addColumn('number', 'Votos');
+    var index;
+    var rows = [];
+    for (index in jsonObj.opciones){
+        rows.push([jsonObj.opciones[index].opcion, parseFloat(jsonObj.opciones[index].votos)]);
     }
+    
+    data.addRows(rows);
+    // Set chart options
+    var options = {
+        'title': 'Resultados',
+        'width': '100%',
+        'height': '100%'
+    };
 
-    var form = document.createElement("form");
-    form.method = "POST";
-    form.action = "src/controller/encuestaController.php"
-    var hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.name = "encuestaId";
-    hidden.value = encuesta.id;
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('resultados'));
+    chart.draw(data, options);
 
-    form.appendChild(cardTitle);
-    form.appendChild(cardText);
-    form.appendChild(cardAbre);
-    form.appendChild(cardCierra);
-    form.appendChild(cardButton);
-    form.appendChild(hidden);
-
-    cardDiv.appendChild(form);
-    return cardDiv;
 }
 
 function requestResultados() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            // display(this.responseText);
+            display(this.responseText);
             document.getElementById("demo").innerHTML = this.responseText;
         }
     };
