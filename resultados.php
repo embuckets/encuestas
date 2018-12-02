@@ -12,13 +12,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
     <script src="js/resultados-admin.js"></script>
-    <script> 
-        google.charts.load('current', { 'packages': ['corechart'] });
-        google.charts.setOnLoadCallback(drawChart);
-    </script>        
-    
 </head>
 
 <body onload="requestResultados()">
@@ -44,9 +38,19 @@ session_start();
             <p id="desc" class="card-text"></p>
             <p id="abre" class="text-muted"></p>
             <p id="cierra" class="text-muted"></p>
-            <div id="resultados"></div>
+            <table class="table-res">
+                <thead>
+                    <tr>
+                        <th>Opcion</th>
+                        <th>Votos</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="resultados">
+                
+                </tbody>
+            </table>
+            <a class="return-btn" href="home-admin.php">Regresar</a>
         </div>
-        <p id="demo"></p>
     </main>
 
     <footer>
