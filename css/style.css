@@ -114,23 +114,23 @@ body {
 
 /* footer */
 .footer {
-position: ab;
-left: 0;
-bottom: 0;
-background-color: black;
-color: white;
-text-align: center;
-/* margin-top: 20px; */
-padding: 10px 0px;
-width: 100%;
-/* height: 60px; */
-
+   position: ab;
+   left: 0;
+   bottom: 0;
+   background-color: black;
+   color: white;
+   text-align: center;
+   /* margin-top: 20px; */
+   padding: 10px 0px;
+   width: 100%;
+   /* height: 60px; */
+   font-size: 0.8rem;
 
 }
 
 main {
-min-height: 60vh;
-margin-bottom: 60px;
+   min-height: 60vh;
+   margin-bottom: 60px;
 }
 
 .form-input {
@@ -361,4 +361,25 @@ margin-bottom: 60px;
 }
 .return-btn:hover {
    opacity: 0.8;
+}
+
+.range {
+   max-width: 80vw;
+   margin: 30px auto;
+}
+
+.date-range-input {
+   line-height: 20px;
+   font-size: 1rem;
+   padding: 5px 5px;
+   margin-right: 12px;
+}
+.range-btn {
+   background-color: #4CAF50;
+   padding: 6px 18px;
+   border: none;
+   text-align: center;
+   cursor: pointer;
+   line-height: 20px;
+   font-size: 1rem;
 }

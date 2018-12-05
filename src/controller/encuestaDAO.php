@@ -1,8 +1,8 @@
 <?php 
-    function getEncuestasEntre($diasAtras, $diasAdelante, $conn){
+    function getEncuestasEntre($abre, $cierra, $conn){
 
         $result = array();
-        $sql = "SELECT * FROM encuesta where cierra between now() - interval $diasAtras day and now() + interval $diasAdelante day";
+        $sql = "SELECT * FROM encuesta where abre > '$abre 00:00:00' and cierra < '$cierra 23:59:59'";
         $resultSet = $conn->query($sql);
 
         if ($resultSet->num_rows > 0) {

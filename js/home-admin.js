@@ -25,6 +25,9 @@ function buildEncuesta(jsonObj) {
 
 function display(jsonText) {
     var container = document.getElementById("container");
+    while(container.lastChild){
+        container.removeChild(container.lastChild);
+    }
     var jsonArray = JSON.parse(jsonText);
     for (i in jsonArray) {
         var encuesta = buildEncuesta(jsonArray[i]);
@@ -86,7 +89,8 @@ function requestEncuestas() {
             display(this.responseText);
         }
     };
-    xhttp.open("GET", "src/controller/encuestaController.php", true);
-    // xhttp.open("GET", "src/controller/encuestaController.php?diasAtras=7&diasAdelante=1", true);
+    var abre = document.getElementById("abre-date").value;
+    var cierra = document.getElementById("cierra-date").value;
+    xhttp.open("GET", "src/controller/encuestaController.php?abre=" + abre + "&cierra=" + cierra, true);
     xhttp.send();
 }

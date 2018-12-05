@@ -37,7 +37,9 @@
 
     <footer>
         <div class="footer">
-            <p>Footer</p>
+            <p>Desarrollado por</p>
+            <p>Emilio Hernández Segovia & Alejandro Gonzalez Yáñez</p>
+            <p>Taller de Desarrollo de Aplicaciones Web</p>
         </div>
     </footer>
 

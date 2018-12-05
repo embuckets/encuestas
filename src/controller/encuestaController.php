@@ -4,13 +4,13 @@
     session_start();
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
-        $diasAtras = $_GET['diasAtras'];
-        $diasAdelante = $_GET['diasAdelante'];
+        $abre = $_GET['abre'];
+        $cierra = $_GET['cierra'];
         
-        if ((!isset($diasAdelante)) and (!isset($diasAtras))){
+        if ((!isset($cierra)) and (!isset($abre))){
             //valores por default
-            $diasAtras = 7;
-            $diasAdelante = 1;
+            $abre = date('Y-m-d', strtotime("-7 day"));
+            $cierra = date('Y-m-d', strtotime("+7 day"));
         }
         $conn = getConnection();
         if ($conn->connect_error) {
@@ -19,8 +19,7 @@
             exit();
         }
         
-        //llamar encuestaDAO convertir el resultado en json y hacer echo
-        $result = getEncuestasEntre($diasAtras, $diasAdelante, $conn);
+        $result = getEncuestasEntre($abre, $cierra, $conn);
         echo json_encode($result);
     }
     
@@ -40,7 +39,6 @@
             $hoy = date("Y-m-d H:i:s", strtotime("now"));
             if($cierra < $hoy){
                 header("location: ../../resultados.php");
-                // header("location: resultadosController.php?encuestaId=$encuestaId");
             }
         }
     }
