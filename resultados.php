@@ -12,19 +12,19 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/home.js"></script>
-    <script src="js/user.js"></script>
+    <script src="js/resultados-admin.js"></script>
 </head>
 
-<body onload="requestEncuestas( );">
+<body onload="requestResultados()">
     <header>
         <div class="topnav">
-            <a class="active left" href="home.php">SIVO</a>
+            <a class="active left" href="home-admin.php">SIVO</a>
             <div class="dropdown right">
                 <button class="dropbtn"><?php echo $_SESSION['nombre']; ?>
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
+                    <a href="crear.php"><i class="fa fa-plus"></i> Nueva encuesta</a>
                     <a href="src/logout.php"><i class="fa fa-power-off"></i> Salir</a>
                 </div>
             </div>
@@ -32,7 +32,25 @@ session_start();
     </header>
 
     <main>
-        <div id="container" class="encuestas grid-container"></div>
+        <h1>Resultados Encuesta</h1>
+        <div class="card justify">
+            <h3 id="titulo" class="card-title"></h3>
+            <p id="desc" class="card-text"></p>
+            <p id="abre" class="text-muted"></p>
+            <p id="cierra" class="text-muted"></p>
+            <table class="table-res">
+                <thead>
+                    <tr>
+                        <th>Opcion</th>
+                        <th>Votos</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="resultados">
+                
+                </tbody>
+            </table>
+            <a class="return-btn" href="home-admin.php">Regresar</a>
+        </div>
     </main>
 
     <footer>

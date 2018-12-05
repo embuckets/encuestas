@@ -18,29 +18,45 @@ session_start();
 <body onload="requestEncuestas()">
     <header>
         <div class="topnav">
-            <a class="active left" href="#home">SIVO</a>
+            <a class="active left" href="home-admin.php">SIVO</a>
             <div class="dropdown right">
                 <button class="dropbtn"><?php echo $_SESSION['nombre']; ?>
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
                     <a href="crear.php"><i class="fa fa-plus"></i> Nueva encuesta</a>
-                    <a href="#"><i class="fa fa-power-off"></i> Salir</a>
+                    <a href="src/logout.php"><i class="fa fa-power-off"></i> Salir</a>
                 </div>
             </div>
         </div>
     </header>
 
     <main>
+        <div class="range" id="range">
+            <label class="date-range" for="abre-date">Abre</label>
+            <input id="abre-date" class="date-range-input" type="date" name="abre-date">
+            <label class="date-range" for="cierra-date">Cierra</label>
+            <input id="cierra-date" class="date-range-input" type="date" name="cierra-date">
+            <button class="range-btn" onclick="requestEncuestas()" >Ver</button>
+        </div>
         <div id="container" class="encuestas grid-container"></div>
     </main>
 
     <footer>
         <div class="footer">
-            <p>Footer</p>
+            <p>Desarrollado por</p>
+            <p>Emilio Hernández Segovia & Alejandro Gonzalez Yáñez</p>
+            <p>Taller de Desarrollo de Aplicaciones Web</p>
         </div>
     </footer>
-
+    <script>
+        var abre = new Date()
+        var cierra = new Date();
+        abre.setDate(abre.getDate() - 7);
+        cierra.setDate(cierra.getDate() + 7);
+        document.getElementById("abre-date").value = abre.toISOString().split('T')[0];
+        document.getElementById("cierra-date").value = cierra.toISOString().split('T')[0];
+    </script>
 </body>
 
 </html>
