@@ -1,4 +1,3 @@
-
 function Encuesta(id, titulo, descripcion) {
     this.id = id;
     this.titulo = titulo;
@@ -25,6 +24,9 @@ function buildEncuesta(jsonObj) {
 
 function display(jsonText) {
     var container = document.getElementById("container");
+    while(container.lastChild){
+        container.removeChild(container.lastChild);
+    }
     var jsonArray = JSON.parse(jsonText);
     var encuestas = [];
     for (i in jsonArray) {
@@ -67,7 +69,7 @@ function buildCard(encuesta) {
 
     var form = document.createElement("form");
     form.method = "POST";
-    form.action = "encuesta";
+    form.action = "src/controller/encuesta.php";
     var hidden = document.createElement("input");
     hidden.type = "hidden";
     hidden.name = "encuestaId";
@@ -92,6 +94,8 @@ function requestEncuestas() {
             display(this.responseText);
         }
     };
-    xhttp.open("GET", "src/controller/encuestaController.php", true);
+    var abre = document.getElementById("abre-date").value;
+    var cierra = document.getElementById("cierra-date").value;
+    xhttp.open("GET", "src/controller/encuestaController.php?abre=" + abre + "&cierra=" + cierra, true);
     xhttp.send();
 }

@@ -1,51 +1,49 @@
 <?php
-   require 'conexion.php';
+    require 'conexion.php';
+    require 'encuestaDAO.php';
+    session_start();
 
-   session_start( );
-
-   $conn = getConnection();
-   if ($conn->connect_error) {
-      $error = "Por el momento la Base de Datos no funciona<br>";
-      $error += $conn->connect_error;
-      $conn->close();
-      header('location: ../../index.php');
-      exit();
-  }
-
-   $sql = "SELECT * FROM encuesta";
-
-   $encuestas = array( );
-   $jsonTemp = array( );
-   if ($result = $conn->query($sql)) {
-      while ($row = $result->fetch_assoc( )) {
-         $jsonTemp['id_encuesta'] = $row['id_encuesta'];
-         $jsonTemp['titulo'] = $row['titulo'];
-         $jsonTemp['descripcion'] = $row['descripcion'];
-
-         $abre = $row['abre'];
-         $fecha_abre = date_parse($abre);
-
-         $cierra = $row['cierra'];
-         $fecha_cierra = date_parse($cierra);
-
-         $jsonTemp['abre']['year']   = $fecha_abre['year'];
-         $jsonTemp['abre']['month']  = $fecha_abre['month'];
-         $jsonTemp['abre']['day']    = $fecha_abre['day'];
-         $jsonTemp['abre']['hour']   = $fecha_abre['hour'];
-         $jsonTemp['abre']['minute'] = $fecha_abre['minute'];
-         $jsonTemp['abre']['second'] = $fecha_abre['second'];
-
-         $jsonTemp['cierra']['year']   = $fecha_cierra['year'];
-         $jsonTemp['cierra']['month']  = $fecha_cierra['month'];
-         $jsonTemp['cierra']['day']    = $fecha_cierra['day'];
-         $jsonTemp['cierra']['hour']   = $fecha_cierra['hour'];
-         $jsonTemp['cierra']['minute'] = $fecha_cierra['minute'];
-         $jsonTemp['cierra']['second'] = $fecha_cierra['second'];
-
-         //$jsonObj = json_encode($jsonTemp);
-         $encuestas[] = $jsonTemp;
-      }
-   }
-   $conn->close();
-   echo json_encode($encuestas);
+    if($_SERVER["REQUEST_METHOD"] == "GET") {
+        $abre = $_GET['abre'];
+        $cierra = $_GET['cierra'];
+        
+        if ((!isset($cierra)) and (!isset($abre))){
+            //valores por default
+            $abre = date('Y-m-d', strtotime("-7 day"));
+            $cierra = date('Y-m-d', strtotime("+7 day"));
+        }
+        $conn = getConnection();
+        if ($conn->connect_error) {
+            echo null;
+            $conn->close();
+            exit();
+        }
+        
+        $result = getEncuestasEntre($abre, $cierra, $conn);
+        echo json_encode($result);
+    }
+    
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $conn = getConnection();
+        if ($conn->connect_error) {
+            echo "error de conexion";
+            $conn->close();
+            exit();
+        }
+        
+        $encuestaId = $_POST['encuestaId'];
+        $_SESSION['encuestaId'] = $encuestaId;
+        $encuesta = getEncuestaById($encuestaId, $conn);
+        if($encuesta){
+            $cierra = date("Y-m-d H:i:s", strtotime($encuesta['cierra']));
+            $hoy = date("Y-m-d H:i:s", strtotime("now"));
+            if($hoy < $cierra) {
+               header("location: ../../vota.php");
+            }
+            else {
+               header("location: ../../resultados-alum.php");
+            }
+        }
+    }
+    $conn->close();
 ?>

@@ -383,3 +383,13 @@ main {
    line-height: 20px;
    font-size: 1rem;
 }
+
+.form-voto {
+   padding-left: 20px;
+   padding-right: 20px;
+   padding-bottom: 20px;
+   background-color: white;
+   /* Add shadows to create the "card" effect */
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   transition: 0.3s;
+}

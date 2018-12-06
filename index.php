@@ -32,7 +32,6 @@
         </form>
         <div ><?php echo $error; ?></div>
     
-        <!-- <p id="demo" ><script>document.getElementById("demo").innerHTML = new Date("2018-11-27 11:12:45"); </script></p> -->
     </main>
 
     <footer>
