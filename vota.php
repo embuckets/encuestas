@@ -33,10 +33,10 @@ session_start();
 
     <main>
         <h1>Vota Encuesta</h1>
-        <div class="justify card">
-                <form id="form-voto" action="src/controller/votacionController.php" method="POST"></form>
-            </div>
-                <a class="return-btn justify" href="home.php">Regresar</a>
+        <div class="form-voto card">
+            <form id="form-voto" action="src/controller/votacionController.php" method="POST"></form>
+            <a class="return-btn" href="home.php">Regresar</a>
+        </div>
     </main>
 
     <footer>

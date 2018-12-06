@@ -1,11 +1,13 @@
 <?php
     require 'conexion.php';
     require 'encuestaDAO.php';
+    require 'votacionDAO.php';
     session_start();
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
         $abre = $_GET['abre'];
         $cierra = $_GET['cierra'];
+        $matricula = $_SESSION['matricula'];
         
         if ((!isset($cierra)) and (!isset($abre))){
             //valores por default
@@ -20,6 +22,13 @@
         }
         
         $result = getEncuestasEntre($abre, $cierra, $conn);
+        for ($i = 0 ; $i < count($result); $i++){
+            $encuesta = $result[$i];
+            if ($opcion = getOpcionVotada($encuesta['id_encuesta'], "2143032439", $conn)){
+                $encuesta['votado'] = $opcion['opcion'];
+                $result[$i] = $encuesta;
+            }
+        }
         echo json_encode($result);
     }
     

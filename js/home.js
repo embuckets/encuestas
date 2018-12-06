@@ -4,12 +4,17 @@ function Encuesta(id, titulo, descripcion) {
     this.descripcion = descripcion;
     this.abre = null;
     this.cierra = null;
+    this.votado = null;
     this.setAbre = function (dateString) {
         this.abre = new Date(dateString);
     };
     this.setCierra = function (dateString) {
         this.cierra = new Date(dateString);
     };
+}
+
+function Opcion(opcion) {
+    this.opcion = opcion;
 }
 
 function buildEncuesta(jsonObj) {
@@ -19,6 +24,9 @@ function buildEncuesta(jsonObj) {
     var encuesta = new Encuesta(id_encuesta, titulo, descripcion);
     encuesta.setAbre(jsonObj.abre);
     encuesta.setCierra(jsonObj.cierra);
+    if (jsonObj.votado) {
+        encuesta.votado = new Opcion(jsonObj.votado);
+    }
     return encuesta;
 }
 
@@ -79,6 +87,14 @@ function buildCard(encuesta) {
     form.appendChild(cardText);
     form.appendChild(cardAbre);
     form.appendChild(cardCierra);
+
+    if (encuesta.votado) {
+        var cardVotado = document.createElement("p");
+        cardVotado.className = "text-bold";
+        cardVotado.innerHTML = "Votaste: " + encuesta.votado.opcion;
+        form.appendChild(cardVotado);
+    }
+
     form.appendChild(cardButton);
     form.appendChild(hidden);
 
